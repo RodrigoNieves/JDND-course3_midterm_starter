@@ -12,8 +12,7 @@ public class Review {
     private Integer reviewId;
 
     @ManyToOne
-    @Column(name ="product_id")
-    private Integer productId;
+    private Product product;
 
     @Column(name="title")
     private String title;
@@ -39,12 +38,12 @@ public class Review {
         this.reviewId = reviewId;
     }
 
-    public Integer getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public String getTitle() {
