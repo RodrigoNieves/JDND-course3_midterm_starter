@@ -1,6 +1,6 @@
 CREATE TABLE comment (
-     comment_id MEDIUMINT NOT NULL AUTO_INCREMENT,
-     review_id MEDIUMINT NOT NULL,
+     comment_id INT NOT NULL AUTO_INCREMENT,
+     review_id INT NOT NULL,
      cutomer CHAR(255) NOT NULL,
      description VARCHAR(1000) NOT NULL,
      created_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
