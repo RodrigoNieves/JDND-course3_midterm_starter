@@ -11,6 +11,7 @@ public class Review {
     @Column(name="review_id")
     private Integer reviewId;
 
+    @ManyToOne
     @Column(name ="product_id")
     private Integer productId;
 
