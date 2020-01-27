@@ -66,15 +66,16 @@ public class ReviewRepositoryTest {
         entityManager.persist(product);
 
         assertThat(reviewRepository.findAll().size(), is(1));
-        Optional<Review> retrieveReview = reviewRepository.findById(review.getReviewId());
-        assertTrue(retrieveReview.isPresent());
-        assertThat(retrieveReview.get().getTitle(), is(review.getTitle()));
+        Optional<Review> optionalReview = reviewRepository.findById(review.getReviewId());
+        assertTrue(optionalReview.isPresent());
+        Review retrieveReview = optionalReview.get();
+        assertThat(retrieveReview.getTitle(), is(review.getTitle()));
 
-        assertThat(retrieveReview.get().getComments().size(), is(1));
-        Comment retrieveComment = retrieveReview.get().getComments().get(0);
+        assertThat(retrieveReview.getComments().size(), is(1));
+        Comment retrieveComment = retrieveReview.getComments().get(0);
         assertThat(retrieveComment.getDescription(), is(comment.getDescription()));
 
-        Product retrieveProduct = retrieveReview.get().getProduct();
+        Product retrieveProduct = retrieveReview.getProduct();
         assertThat(retrieveProduct.getTitle(),
                 is(product.getTitle()));
     }
