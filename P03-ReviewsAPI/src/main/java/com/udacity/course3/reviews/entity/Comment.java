@@ -1,9 +1,12 @@
 package com.udacity.course3.reviews.entity;
 
+import org.hibernate.annotations.DynamicInsert;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@DynamicInsert
 @Table(name="comment")
 public class Comment {
 

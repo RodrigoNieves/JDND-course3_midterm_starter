@@ -1,11 +1,14 @@
 package com.udacity.course3.reviews.entity;
 
+import org.hibernate.annotations.DynamicInsert;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@DynamicInsert
 @Table(name = "product")
 public class Product {
     @Id
