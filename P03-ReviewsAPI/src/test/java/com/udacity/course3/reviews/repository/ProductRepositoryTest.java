@@ -70,11 +70,11 @@ public class ProductRepositoryTest {
         assertThat(retrieve.get().getTitle(), is(product.getTitle()));
 
         assertThat(product.getReviews().size(), is(1));
-        Review retriveReview = product.getReviews().get(0);
-        assertThat(retriveReview.getTitle(), is(review.getTitle()));
+        Review retrieveReview = product.getReviews().get(0);
+        assertThat(retrieveReview.getTitle(), is(review.getTitle()));
 
-        assertThat(retriveReview.getComments().size(), is(1));
-        Comment retrieveComment = retriveReview.getComments().get(0);
+        assertThat(retrieveReview.getComments().size(), is(1));
+        Comment retrieveComment = retrieveReview.getComments().get(0);
         assertThat(retrieveComment.getDescription(), is(comment.getDescription()));
     }
 }
