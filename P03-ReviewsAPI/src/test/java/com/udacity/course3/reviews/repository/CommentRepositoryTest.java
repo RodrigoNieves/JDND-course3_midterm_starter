@@ -14,7 +14,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 
-import java.util.Date;
 import java.util.Optional;
 
 import static org.hamcrest.Matchers.is;
@@ -38,28 +37,25 @@ public class CommentRepositoryTest {
         assertNotNull(entityManager);
         assertNotNull(testEntityManager);
         assertNotNull(commentRepository);
-    }
+    }dd .
 
     @Test
     public void testFindByCommentId() {
         Product product = new Product();
         product.setTitle("Product1");
         product.setDescription("Amazing new product");
-        product.setCreatedTime(new Date());
 
         Review review = new Review();
         review.setCustomer("Rodrigo");
         review.setTitle("Good Product");
         review.setDescription("I love it!!!");
         review.setScore(5);
-        review.setCreatedTime(new Date());
         review.setProduct(product);
         product.getReviews().add(review);
 
         Comment comment = new Comment();
         comment.setCustmer("Seller");
         comment.setDescription("Thanks");
-        comment.setCreatedTime(new Date());
         comment.setReview(review);
         review.getComments().add(comment);
 

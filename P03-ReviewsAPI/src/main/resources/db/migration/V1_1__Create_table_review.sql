@@ -5,7 +5,7 @@ CREATE TABLE review (
      customer CHAR(255) NOT NULL,
      description VARCHAR(1000) NOT NULL,
      score TINYINT NOT NULL DEFAULT 0,
-     created_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+     created_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
      PRIMARY KEY (review_id),
      constraint review_product_fk  foreign key (product_id) references product (product_id)
 );
