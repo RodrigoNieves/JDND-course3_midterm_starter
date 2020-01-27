@@ -1,5 +1,6 @@
 package com.udacity.course3.reviews.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
@@ -16,8 +17,9 @@ public class Review {
     @Column(name="review_id")
     private Integer reviewId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="product_id")
+    @JsonIgnore
     private Product product;
 
     @Column(name="title")
@@ -35,6 +37,7 @@ public class Review {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="created_time")
     private Date createdTime;
+
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "review", orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
