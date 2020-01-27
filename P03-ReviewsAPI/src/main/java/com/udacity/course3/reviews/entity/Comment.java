@@ -1,7 +1,5 @@
 package com.udacity.course3.reviews.entity;
 
-import org.hibernate.annotations.CreationTimestamp;
-
 import javax.persistence.*;
 import java.util.Date;
 
