@@ -37,7 +37,7 @@ public class CommentRepositoryTest {
         assertNotNull(entityManager);
         assertNotNull(testEntityManager);
         assertNotNull(commentRepository);
-    }dd .
+    }
 
     @Test
     public void testFindByCommentId() {
