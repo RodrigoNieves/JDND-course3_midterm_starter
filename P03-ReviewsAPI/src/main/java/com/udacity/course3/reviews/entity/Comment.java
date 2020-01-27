@@ -1,5 +1,7 @@
 package com.udacity.course3.reviews.entity;
 
+import org.hibernate.annotations.CreationTimestamp;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -12,7 +14,8 @@ public class Comment {
     @Column(name="comment_id")
     private Integer commentId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="review_id")
     private Review review;
 
     @Column(name="customer")

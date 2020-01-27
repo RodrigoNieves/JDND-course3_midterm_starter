@@ -1,7 +1,9 @@
 package com.udacity.course3.reviews.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "product")
@@ -17,12 +19,16 @@ public class Product {
     @Column(name = "description")
     private String description;
 
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name ="created_time")
     private Date createdTime;
 
     @Column(name="stock")
     private int stock;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product",orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
 
     public Integer getProductId() {
         return productId;
@@ -62,5 +68,13 @@ public class Product {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }
