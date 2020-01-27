@@ -19,16 +19,17 @@ import java.util.Optional;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
-
+import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class ProductRepositoryTest {
-    @Autowired private DataSource dataSource;
+public class CommentRepositoryTest {
+    @Autowired
+    private DataSource dataSource;
     @Autowired private JdbcTemplate jdbcTemplate;
     @Autowired private EntityManager entityManager;
     @Autowired private TestEntityManager testEntityManager;
-    @Autowired private ProductRepository productRepository;
+    @Autowired private CommentRepository commentRepository;
 
     @Test
     public void injectedComponetsAreNotNull() {
@@ -36,11 +37,11 @@ public class ProductRepositoryTest {
         assertNotNull(jdbcTemplate);
         assertNotNull(entityManager);
         assertNotNull(testEntityManager);
-        assertNotNull(productRepository);
+        assertNotNull(commentRepository);
     }
 
     @Test
-    public void testFindByProductId() {
+    public void testFindByCommentId() {
         Product product = new Product();
         product.setTitle("Product1");
         product.setDescription("Amazing new product");
@@ -64,19 +65,17 @@ public class ProductRepositoryTest {
 
         entityManager.persist(product);
 
-        assertThat(productRepository.findAll().size(), is(1));
-        Optional<Product> optionalProduct = productRepository.findById(product.getProductId());
-        assertTrue(optionalProduct.isPresent());
-        Product retrieveProduct = optionalProduct.get();
+        assertThat(commentRepository.findAll().size(), is(1));
+        Optional<Comment> optionalComment = commentRepository.findById(comment.getCommentId());
+        assertTrue(optionalComment.isPresent());
+        Comment retrieveComment = optionalComment.get();
 
-        assertThat(retrieveProduct.getTitle(), is(product.getTitle()));
+        assertThat(retrieveComment.getDescription(), is(comment.getDescription()));
 
-        assertThat(product.getReviews().size(), is(1));
-        Review retrieveReview = product.getReviews().get(0);
+        Review retrieveReview = retrieveComment.getReview();
         assertThat(retrieveReview.getTitle(), is(review.getTitle()));
 
-        assertThat(retrieveReview.getComments().size(), is(1));
-        Comment retrieveComment = retrieveReview.getComments().get(0);
-        assertThat(retrieveComment.getDescription(), is(comment.getDescription()));
+        Product retrieveProduct = retrieveReview.getProduct();
+        assertThat(retrieveProduct.getTitle(), is(product.getTitle()));
     }
 }
