@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,12 +24,14 @@ public class Review {
     private Product product;
 
     @Column(name="title")
+    @NotEmpty(message = "Please provide a review's title")
     private String title;
 
     @Column(name="customer")
     private String customer;
 
     @Column(name="description")
+    @NotEmpty(message = "Please provide a review's description")
     private String description;
 
     @Column(name="score")

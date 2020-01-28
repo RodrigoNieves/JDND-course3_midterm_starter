@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 @Entity
@@ -25,6 +26,7 @@ public class Comment {
     private String custmer;
 
     @Column(name="description")
+    @NotEmpty(message = "Please provide a comment's description")
     private String description;
 
     @Temporal(TemporalType.TIMESTAMP)

@@ -3,6 +3,7 @@ package com.udacity.course3.reviews.entity;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,9 +18,11 @@ public class Product {
     private Integer productId;
 
     @Column(name = "title")
+    @NotEmpty(message = "Please provide a product's title")
     private String title;
 
     @Column(name = "description")
+    @NotEmpty(message = "Please provide a product's descripton")
     private String description;
 
     @GeneratedValue(strategy = GenerationType.AUTO)
