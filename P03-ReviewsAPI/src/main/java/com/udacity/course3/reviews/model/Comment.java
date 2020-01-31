@@ -1,6 +1,5 @@
 package com.udacity.course3.reviews.model;
 
-import com.udacity.course3.reviews.entity.Review;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
@@ -12,9 +11,7 @@ public class Comment {
     @Id
     private Integer commentId;
 
-    private Review review;
-
-    private String custmer;
+    private String customer;
 
     private String description;
 
@@ -28,20 +25,12 @@ public class Comment {
         this.commentId = commentId;
     }
 
-    public Review getReview() {
-        return review;
+    public String getCustomer() {
+        return customer;
     }
 
-    public void setReview(Review review) {
-        this.review = review;
-    }
-
-    public String getCustmer() {
-        return custmer;
-    }
-
-    public void setCustmer(String custmer) {
-        this.custmer = custmer;
+    public void setCustomer(String customer) {
+        this.customer = customer;
     }
 
     public String getDescription() {

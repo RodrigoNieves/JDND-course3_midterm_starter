@@ -23,7 +23,7 @@ public class Comment {
     private Review review;
 
     @Column(name="customer")
-    private String custmer;
+    private String customer;
 
     @Column(name="description")
     @NotEmpty(message = "Please provide a comment's description")
@@ -49,12 +49,12 @@ public class Comment {
         this.review = review;
     }
 
-    public String getCustmer() {
-        return custmer;
+    public String getCustomer() {
+        return customer;
     }
 
-    public void setCustmer(String custmer) {
-        this.custmer = custmer;
+    public void setCustomer(String customer) {
+        this.customer = customer;
     }
 
     public String getDescription() {

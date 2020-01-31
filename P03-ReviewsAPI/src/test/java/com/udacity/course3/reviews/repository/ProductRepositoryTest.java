@@ -53,7 +53,7 @@ public class ProductRepositoryTest {
         product.getReviews().add(review);
 
         Comment comment = new Comment();
-        comment.setCustmer("Seller");
+        comment.setCustomer("Seller");
         comment.setDescription("Thanks");
         comment.setReview(review);
         review.getComments().add(comment);

@@ -1,6 +1,5 @@
 package com.udacity.course3.reviews.model;
 
-import com.udacity.course3.reviews.model.Comment;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
