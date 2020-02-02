@@ -1,8 +1,10 @@
 package com.udacity.course3.reviews.model;
 
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,14 +15,17 @@ public class Review {
     @Id
     private Integer reviewId;
 
+    @NotEmpty(message = "Please provide a review's title")
     private String title;
 
     private String customer;
 
+    @NotEmpty(message = "Please provide a review's description")
     private String description;
 
     private Integer score;
 
+    @CreatedDate
     private Date createdTime;
 
     private List<Comment> comments = new ArrayList<>();
