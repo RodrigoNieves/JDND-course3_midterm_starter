@@ -2,12 +2,10 @@ package com.udacity.course3.reviews.controller;
 
 import com.udacity.course3.reviews.entity.Comment;
 import com.udacity.course3.reviews.entity.Review;
-import com.udacity.course3.reviews.repository.CommentRepository;
-import com.udacity.course3.reviews.repository.ReviewRepository;
-import org.springframework.http.HttpStatus;
+import com.udacity.course3.reviews.repository.jpa.CommentRepository;
+import com.udacity.course3.reviews.repository.jpa.ReviewRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpServerErrorException;
 
 import java.util.List;
 import java.util.Optional;

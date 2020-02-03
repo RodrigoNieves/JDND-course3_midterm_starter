@@ -3,6 +3,7 @@ package com.udacity.course3.reviews.repository;
 import com.udacity.course3.reviews.entity.Comment;
 import com.udacity.course3.reviews.entity.Product;
 import com.udacity.course3.reviews.entity.Review;
+import com.udacity.course3.reviews.repository.jpa.CommentRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
