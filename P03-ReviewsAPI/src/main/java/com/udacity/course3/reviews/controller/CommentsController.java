@@ -1,10 +1,7 @@
 package com.udacity.course3.reviews.controller;
 
 import com.udacity.course3.reviews.entity.Comment;
-import com.udacity.course3.reviews.entity.Review;
 import com.udacity.course3.reviews.persistance.PersistanceService;
-import com.udacity.course3.reviews.repository.jpa.CommentRepository;
-import com.udacity.course3.reviews.repository.jpa.ReviewRepository;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
