@@ -2,6 +2,7 @@ package com.udacity.course3.reviews.controller;
 
 import com.udacity.course3.reviews.entity.Comment;
 import com.udacity.course3.reviews.entity.Review;
+import com.udacity.course3.reviews.persistance.PersistanceService;
 import com.udacity.course3.reviews.repository.jpa.CommentRepository;
 import com.udacity.course3.reviews.repository.jpa.ReviewRepository;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +18,11 @@ import java.util.Optional;
 @RequestMapping("/comments")
 public class CommentsController {
 
-    private final CommentRepository commentRepository;
-    private final ReviewRepository reviewRepository;
+    private final PersistanceService persistanceService;
 
     public CommentsController(
-            CommentRepository commentRepository,
-            ReviewRepository reviewRepository) {
-        this.commentRepository = commentRepository;
-        this.reviewRepository = reviewRepository;
+            PersistanceService persistanceService) {
+        this.persistanceService = persistanceService;
     }
     /**
      * Creates a comment for a review.
@@ -35,13 +33,13 @@ public class CommentsController {
     public ResponseEntity<Comment> createCommentForReview(
             @PathVariable("reviewId") Integer reviewId,
             @RequestBody Comment comment) {
-        Optional<Review> optionalReview = reviewRepository.findById(reviewId);
-        if(!optionalReview.isPresent()) {
+
+        Optional<Comment> optionalComment = persistanceService.createCommentForReview(reviewId, comment);
+        if(!optionalComment.isPresent()) {
             return ResponseEntity.notFound().build();
         }
 
-        comment.setReview(optionalReview.get());
-        return ResponseEntity.ok(commentRepository.save(comment));
+        return ResponseEntity.ok(optionalComment.get());
     }
 
     /**
@@ -51,11 +49,11 @@ public class CommentsController {
      */
     @RequestMapping(value = "/reviews/{reviewId}", method = RequestMethod.GET)
     public ResponseEntity<List<Comment>> listCommentsForReview(@PathVariable("reviewId") Integer reviewId) {
-        Optional<Review> optionalReview = reviewRepository.findById(reviewId);
-        if(!optionalReview.isPresent()) {
+        Optional<List<Comment>> optionalComments = persistanceService.listCommentsForReview(reviewId);
+        if(!optionalComments.isPresent()) {
             return ResponseEntity.notFound().build();
         }
 
-        return ResponseEntity.ok(optionalReview.get().getComments());
+        return ResponseEntity.ok(optionalComments.get());
     }
 }
