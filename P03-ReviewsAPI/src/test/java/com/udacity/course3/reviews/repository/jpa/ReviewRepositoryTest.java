@@ -1,9 +1,9 @@
-package com.udacity.course3.reviews.repository;
+package com.udacity.course3.reviews.repository.jpa;
 
 import com.udacity.course3.reviews.entity.Comment;
 import com.udacity.course3.reviews.entity.Product;
 import com.udacity.course3.reviews.entity.Review;
-import com.udacity.course3.reviews.repository.jpa.CommentRepository;
+import com.udacity.course3.reviews.repository.jpa.ReviewRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,19 +17,19 @@ import javax.sql.DataSource;
 
 import java.util.Optional;
 
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class CommentRepositoryTest {
-    @Autowired
-    private DataSource dataSource;
+public class ReviewRepositoryTest {
+    @Autowired private DataSource dataSource;
     @Autowired private JdbcTemplate jdbcTemplate;
     @Autowired private EntityManager entityManager;
     @Autowired private TestEntityManager testEntityManager;
-    @Autowired private CommentRepository commentRepository;
+    @Autowired private ReviewRepository reviewRepository;
 
     @Test
     public void injectedComponetsAreNotNull() {
@@ -37,11 +37,11 @@ public class CommentRepositoryTest {
         assertNotNull(jdbcTemplate);
         assertNotNull(entityManager);
         assertNotNull(testEntityManager);
-        assertNotNull(commentRepository);
+        assertNotNull(reviewRepository);
     }
 
     @Test
-    public void testFindByCommentId() {
+    public void testFindByReviewId() {
         Product product = new Product();
         product.setTitle("Product1");
         product.setDescription("Amazing new product");
@@ -62,17 +62,18 @@ public class CommentRepositoryTest {
 
         entityManager.persist(product);
 
-        assertThat(commentRepository.findAll().size(), is(1));
-        Optional<Comment> optionalComment = commentRepository.findById(comment.getCommentId());
-        assertTrue(optionalComment.isPresent());
-        Comment retrieveComment = optionalComment.get();
-
-        assertThat(retrieveComment.getDescription(), is(comment.getDescription()));
-
-        Review retrieveReview = retrieveComment.getReview();
+        assertThat(reviewRepository.findAll().size(), is(1));
+        Optional<Review> optionalReview = reviewRepository.findById(review.getReviewId());
+        assertTrue(optionalReview.isPresent());
+        Review retrieveReview = optionalReview.get();
         assertThat(retrieveReview.getTitle(), is(review.getTitle()));
 
+        assertThat(retrieveReview.getComments().size(), is(1));
+        Comment retrieveComment = retrieveReview.getComments().get(0);
+        assertThat(retrieveComment.getDescription(), is(comment.getDescription()));
+
         Product retrieveProduct = retrieveReview.getProduct();
-        assertThat(retrieveProduct.getTitle(), is(product.getTitle()));
+        assertThat(retrieveProduct.getTitle(),
+                is(product.getTitle()));
     }
 }
