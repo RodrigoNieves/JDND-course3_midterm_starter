@@ -3,22 +3,25 @@ package com.udacity.course3.reviews.persistance;
 import com.udacity.course3.reviews.entity.Comment;
 import com.udacity.course3.reviews.entity.Review;
 import com.udacity.course3.reviews.repository.jpa.CommentRepository;
+import com.udacity.course3.reviews.repository.jpa.ProductRepository;
 import com.udacity.course3.reviews.repository.jpa.ReviewRepository;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.Optional;
 
-public class PersistanceService {
+public class PersistenceService {
 
     private final CommentRepository commentRepository;
     private final ReviewRepository reviewRepository;
+    private final ProductRepository productRepository;
 
-    public PersistanceService(
+    public PersistenceService(
             CommentRepository commentRepository,
-            ReviewRepository reviewRepository) {
+            ReviewRepository reviewRepository,
+            ProductRepository productRepository) {
         this.commentRepository = commentRepository;
         this.reviewRepository = reviewRepository;
+        this.productRepository = productRepository;
     }
 
     public Optional<Comment> createCommentForReview(Integer reviewId, Comment comment) {
