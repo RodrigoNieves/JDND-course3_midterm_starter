@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Document("reviews")
-public class Review {
+public class ReviewMongo {
 
     @Id
     private Integer reviewId;
@@ -28,7 +28,7 @@ public class Review {
     @CreatedDate
     private Date createdTime;
 
-    private List<Comment> comments = new ArrayList<>();
+    private List<CommentMongo> comments = new ArrayList<>();
 
     public Integer getReviewId() {
         return reviewId;
@@ -78,11 +78,11 @@ public class Review {
         this.createdTime = createdTime;
     }
 
-    public List<Comment> getComments() {
+    public List<CommentMongo> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(List<CommentMongo> comments) {
         this.comments = comments;
     }
 }

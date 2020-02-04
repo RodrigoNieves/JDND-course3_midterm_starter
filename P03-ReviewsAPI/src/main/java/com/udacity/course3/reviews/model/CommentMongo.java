@@ -8,7 +8,7 @@ import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 @Document("comments")
-public class Comment {
+public class CommentMongo {
 
     @Id
     private Integer commentId;

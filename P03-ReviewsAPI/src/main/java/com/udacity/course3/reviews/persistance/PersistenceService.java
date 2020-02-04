@@ -1,6 +1,7 @@
 package com.udacity.course3.reviews.persistance;
 
 import com.udacity.course3.reviews.entity.Comment;
+import com.udacity.course3.reviews.entity.Product;
 import com.udacity.course3.reviews.entity.Review;
 import com.udacity.course3.reviews.repository.jpa.CommentRepository;
 import com.udacity.course3.reviews.repository.jpa.ProductRepository;
@@ -41,5 +42,24 @@ public class PersistenceService {
         }
 
         return Optional.of(optionalReview.get().getComments());
+    }
+
+    public Optional<Review> createReviewForProduct(Integer productId, Review review) {
+        Optional<Product> optionalProduct = productRepository.findById(productId);
+        if(!optionalProduct.isPresent()) {
+            return Optional.empty();
+        }
+
+        review.setProduct(optionalProduct.get());
+        return Optional.of(reviewRepository.save(review));
+    }
+
+    public Optional<List<Review>> listReviewsForProduct(Integer productId) {
+        Optional<Product> optionalProduct = productRepository.findById(productId);
+        if(!optionalProduct.isPresent()) {
+            return Optional.empty();
+        }
+
+        return Optional.of(optionalProduct.get().getReviews());
     }
 }
