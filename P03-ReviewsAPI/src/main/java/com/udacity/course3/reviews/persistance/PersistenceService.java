@@ -6,9 +6,7 @@ import com.udacity.course3.reviews.entity.Review;
 import com.udacity.course3.reviews.repository.jpa.CommentRepository;
 import com.udacity.course3.reviews.repository.jpa.ProductRepository;
 import com.udacity.course3.reviews.repository.jpa.ReviewRepository;
-import org.springframework.http.ResponseEntity;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -69,7 +67,7 @@ public class PersistenceService {
         productRepository.save(product);
     }
 
-    public Optional<Product> findPorductById(Integer id) {
+    public Optional<Product> findProductById(Integer id) {
         return  productRepository.findById(id);
     }
 

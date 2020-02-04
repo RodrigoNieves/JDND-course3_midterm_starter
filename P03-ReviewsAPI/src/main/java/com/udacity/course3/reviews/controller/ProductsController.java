@@ -2,7 +2,6 @@ package com.udacity.course3.reviews.controller;
 
 import com.udacity.course3.reviews.entity.Product;
 import com.udacity.course3.reviews.persistance.PersistenceService;
-import com.udacity.course3.reviews.repository.jpa.ProductRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -40,7 +39,7 @@ public class ProductsController {
      */
     @RequestMapping(value = "/{id}")
     public ResponseEntity<Product> findById(@PathVariable("id") Integer id) {
-        Optional<Product> optionalProduct = persistenceService.findPorductById(id);
+        Optional<Product> optionalProduct = persistenceService.findProductById(id);
         if(!optionalProduct.isPresent()){
             return ResponseEntity.notFound().build();
         }
