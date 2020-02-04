@@ -26,4 +26,5 @@
     <option name="Skip Tests" value="false" />
     <pom-list />
   </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="1.8" project-jdk-type="JavaSDK" />
 </project>
