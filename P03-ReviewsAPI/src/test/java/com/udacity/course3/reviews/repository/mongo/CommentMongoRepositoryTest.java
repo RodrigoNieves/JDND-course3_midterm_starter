@@ -11,12 +11,16 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
-
+@RunWith(SpringRunner.class)
 @DataMongoTest
-@ExtendWith(SpringExtension.class)
 public class CommentMongoRepositoryTest {
+
+    @Autowired CommentMongoRepository commentMongoRepository;
+
     @Autowired
     MongoTemplate mongoTemplate;
 
@@ -27,15 +31,15 @@ public class CommentMongoRepositoryTest {
         comment.setCustomer("Seller");
         comment.setDescription("Thanks");
 
-        mongoTemplate.save(comment, "comments");
+        comment = commentMongoRepository.save(comment);
 
-        assertThat(mongoTemplate.findAll(CommentMongo.class, "comments").size())
-                .isEqualTo(1);
-        assertThat(mongoTemplate.findAll(CommentMongo.class, "comments").get(0).getCommentId())
+        Optional<CommentMongo> retrive = commentMongoRepository.findById(comment.getCommentId());
+        assertThat(retrive.isPresent());
+        assertThat(retrive.get().getCommentId())
                 .isEqualTo(comment.getCommentId());
-        assertThat(mongoTemplate.findAll(CommentMongo.class, "comments").get(0).getDescription())
+        assertThat(retrive.get().getDescription())
                 .isEqualTo(comment.getDescription());
-        assertThat(mongoTemplate.findAll(CommentMongo.class, "comments").get(0).getCustomer())
+        assertThat(retrive.get().getCustomer())
                 .isEqualTo(comment.getCustomer());
     }
 }
