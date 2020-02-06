@@ -13,6 +13,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringRunner.class)
 @DataMongoTest
@@ -39,13 +40,22 @@ public class CommentMongoRepositoryTest {
 
         comment = commentMongoRepository.save(comment);
 
-        Optional<CommentMongo> retrive = commentMongoRepository.findById(comment.getCommentId());
-        assertThat(retrive.isPresent());
-        assertThat(retrive.get().getCommentId())
+        System.err.println(comment.getCommentId());
+        System.err.println(commentMongoRepository.findAll().size());
+        System.err.println(commentMongoRepository.findAll().get(0).getCommentId());
+        System.err.println(commentMongoRepository.findAll().get(0).getCustomer());
+        System.err.println(commentMongoRepository.findAll().get(0).getDescription());
+        System.err.println(commentMongoRepository.findAll().get(0).getCreatedTime());
+
+        Optional<CommentMongo> retrive = commentMongoRepository.findByCommentId(comment.getCommentId());
+
+        assertTrue(retrive.isPresent());
+        CommentMongo result = retrive.get();
+        assertThat(result.getCommentId())
                 .isEqualTo(comment.getCommentId());
-        assertThat(retrive.get().getDescription())
+        assertThat(result.getDescription())
                 .isEqualTo(comment.getDescription());
-        assertThat(retrive.get().getCustomer())
+        assertThat(result.getCustomer())
                 .isEqualTo(comment.getCustomer());
     }
 }
