@@ -5,6 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Document("comments")
@@ -20,6 +21,13 @@ public class CommentMongo {
 
     @CreatedDate
     private Date createdTime;
+
+    public CommentMongo(Integer commentId, String customer, String description) {
+        this.commentId = commentId;
+        this.customer = customer;
+        this.description = description;
+        this.createdTime = new Date();
+    }
 
     public Integer getCommentId() {
         return commentId;
