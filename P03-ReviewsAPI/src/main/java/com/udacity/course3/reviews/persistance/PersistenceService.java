@@ -12,6 +12,7 @@ import com.udacity.course3.reviews.repository.mongo.CommentMongoRepository;
 import com.udacity.course3.reviews.repository.mongo.ReviewMongoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -91,13 +92,20 @@ public class PersistenceService {
         return Optional.of(savedReview);
     }
 
-    public Optional<List<Review>> listReviewsForProduct(Integer productId) {
+    public Optional<List<ReviewMongo>> listReviewsForProduct(Integer productId) {
         Optional<Product> optionalProduct = productRepository.findById(productId);
         if(!optionalProduct.isPresent()) {
             return Optional.empty();
         }
 
-        return Optional.of(optionalProduct.get().getReviews());
+        List<ReviewMongo> reviews = new ArrayList<>();
+        for (Review r: optionalProduct.get().getReviews()) {
+            Optional<ReviewMongo> reviewMongo = reviewMongoRepository.findByReviewId(r.getReviewId());
+            if (reviewMongo.isPresent()) {
+                reviews.add(reviewMongo.get());
+            }
+        }
+        return Optional.of(reviews);
     }
 
     public void createProduct(Product product) {

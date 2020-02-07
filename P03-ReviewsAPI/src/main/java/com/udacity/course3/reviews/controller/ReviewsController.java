@@ -1,6 +1,7 @@
 package com.udacity.course3.reviews.controller;
 
 import com.udacity.course3.reviews.entity.Review;
+import com.udacity.course3.reviews.model.ReviewMongo;
 import com.udacity.course3.reviews.persistance.PersistenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -46,9 +47,9 @@ public class ReviewsController {
      * @return The list of reviews.
      */
     @RequestMapping(value = "/reviews/products/{productId}", method = RequestMethod.GET)
-    public ResponseEntity<List<Review>> listReviewsForProduct(
+    public ResponseEntity<List<ReviewMongo>> listReviewsForProduct(
             @PathVariable("productId") Integer productId) {
-        Optional<List<Review>> optionalReviews = persistenceService.listReviewsForProduct(productId);
+        Optional<List<ReviewMongo>> optionalReviews = persistenceService.listReviewsForProduct(productId);
         if(!optionalReviews.isPresent()) {
             return ResponseEntity.notFound().build();
         }
