@@ -45,8 +45,11 @@ public class PersistenceService {
             return Optional.empty();
         }
 
+        // Save comment in MySQL
         comment.setReview(optionalReview.get());
         Comment savedComment = commentRepository.save(comment);
+
+        // Back up comment on MongoDB
         CommentMongo commentMongo = new CommentMongo();
         commentMongo.setCommentId(comment.getCommentId());
         commentMongo.setCustomer(comment.getCustomer());
