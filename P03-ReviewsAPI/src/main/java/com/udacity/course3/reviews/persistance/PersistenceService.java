@@ -75,8 +75,20 @@ public class PersistenceService {
             return Optional.empty();
         }
 
+        // Save review in MySQLt
         review.setProduct(optionalProduct.get());
-        return Optional.of(reviewRepository.save(review));
+        Review savedReview = reviewRepository.save(review);
+
+        // Backup review in MongoDB
+        ReviewMongo reviewMongo = new ReviewMongo();
+        reviewMongo.setReviewId(savedReview.getReviewId());
+        reviewMongo.setCustomer(savedReview.getCustomer());
+        reviewMongo.setDescription(savedReview.getDescription());
+        reviewMongo.setScore(savedReview.getScore());
+        reviewMongo.setTitle(savedReview.getTitle());
+        reviewMongo.setCreatedTime(savedReview.getCreatedTime());
+        reviewMongoRepository.save(reviewMongo);
+        return Optional.of(savedReview);
     }
 
     public Optional<List<Review>> listReviewsForProduct(Integer productId) {
