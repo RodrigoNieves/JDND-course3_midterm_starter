@@ -1,6 +1,7 @@
 package com.udacity.course3.reviews.controller;
 
 import com.udacity.course3.reviews.entity.Comment;
+import com.udacity.course3.reviews.model.CommentMongo;
 import com.udacity.course3.reviews.persistance.PersistenceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -46,8 +47,8 @@ public class CommentsController {
      * @param reviewId The id of the review.
      */
     @RequestMapping(value = "/reviews/{reviewId}", method = RequestMethod.GET)
-    public ResponseEntity<List<Comment>> listCommentsForReview(@PathVariable("reviewId") Integer reviewId) {
-        Optional<List<Comment>> optionalComments = persistenceService.listCommentsForReview(reviewId);
+    public ResponseEntity<List<CommentMongo>> listCommentsForReview(@PathVariable("reviewId") Integer reviewId) {
+        Optional<List<CommentMongo>> optionalComments = persistenceService.listCommentsForReview(reviewId);
         if(!optionalComments.isPresent()) {
             return ResponseEntity.notFound().build();
         }

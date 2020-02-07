@@ -57,8 +57,8 @@ public class PersistenceService {
         return Optional.of(savedComment);
     }
 
-    public Optional<List<Comment>> listCommentsForReview(Integer reviewId) {
-        Optional<Review> optionalReview = reviewRepository.findById(reviewId);
+    public Optional<List<CommentMongo>> listCommentsForReview(Integer reviewId) {
+        Optional<ReviewMongo> optionalReview = reviewMongoRepository.findByReviewId(reviewId);
         if(!optionalReview.isPresent()) {
             return Optional.empty();
         }
