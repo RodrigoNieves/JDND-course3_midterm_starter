@@ -1,8 +1,5 @@
 package com.udacity.course3.reviews.repository.mongo;
 
-import com.udacity.course3.reviews.entity.Comment;
-import com.udacity.course3.reviews.entity.Product;
-import com.udacity.course3.reviews.entity.Review;
 import com.udacity.course3.reviews.model.CommentMongo;
 import com.udacity.course3.reviews.model.ReviewMongo;
 import org.junit.Test;
