@@ -3,9 +3,11 @@ package com.udacity.course3.reviews.persistance;
 import com.udacity.course3.reviews.entity.Comment;
 import com.udacity.course3.reviews.entity.Product;
 import com.udacity.course3.reviews.entity.Review;
+import com.udacity.course3.reviews.model.CommentMongo;
 import com.udacity.course3.reviews.repository.jpa.CommentRepository;
 import com.udacity.course3.reviews.repository.jpa.ProductRepository;
 import com.udacity.course3.reviews.repository.jpa.ReviewRepository;
+import com.udacity.course3.reviews.repository.mongo.CommentMongoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,17 +18,19 @@ public class PersistenceService {
 
 
     private final CommentRepository commentRepository;
-
     private final ReviewRepository reviewRepository;
-
     private final ProductRepository productRepository;
+    private final CommentMongoRepository commentMongoRepository;
+
 
     public PersistenceService(CommentRepository commentRepository,
                               ReviewRepository reviewRepository,
-                              ProductRepository productRepository){
+                              ProductRepository productRepository,
+                              CommentMongoRepository commentMongoRepository){
         this.commentRepository = commentRepository;
         this.reviewRepository = reviewRepository;
         this.productRepository = productRepository;
+        this.commentMongoRepository = commentMongoRepository;
     }
 
     public Optional<Comment> createCommentForReview(Integer reviewId, Comment comment) {
@@ -36,7 +40,14 @@ public class PersistenceService {
         }
 
         comment.setReview(optionalReview.get());
-        return Optional.of(commentRepository.save(comment));
+        Comment savedComment = commentRepository.save(comment);
+        CommentMongo commentMongo = new CommentMongo();
+        commentMongo.setCommentId(comment.getCommentId());
+        commentMongo.setCustomer(comment.getCustomer());
+        commentMongo.setDescription(comment.getDescription());
+        commentMongo.setCreatedTime(comment.getCreatedTime());
+        commentMongoRepository.save(commentMongo);
+        return Optional.of(savedComment);
     }
 
     public Optional<List<Comment>> listCommentsForReview(Integer reviewId) {
