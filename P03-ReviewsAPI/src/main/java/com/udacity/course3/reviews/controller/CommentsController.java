@@ -16,8 +16,11 @@ import java.util.Optional;
 @RequestMapping("/comments")
 public class CommentsController {
 
-    @Autowired
     private PersistenceService persistenceService;
+
+    public CommentsController() {
+        persistenceService = new PersistenceService();
+    }
 
     /**
      * Creates a comment for a review.

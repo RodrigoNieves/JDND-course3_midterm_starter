@@ -15,9 +15,11 @@ import java.util.Optional;
 @RestController
 public class ReviewsController {
 
-    @Autowired
     private PersistenceService persistenceService;
 
+    public ReviewsController() {
+        persistenceService = new PersistenceService();
+    }
 
     /**
      * Creates a review for a product.
