@@ -29,6 +29,13 @@ public class CommentMongo {
         this.createdTime = new Date();
     }
 
+    public CommentMongo() {
+        this.commentId = 0;
+        this.customer = "(empty)";
+        this.description = "(empty)";
+        this.createdTime = new Date();
+    }
+
     public Integer getCommentId() {
         return commentId;
     }
