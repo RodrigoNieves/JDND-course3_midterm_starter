@@ -2,6 +2,7 @@ package com.udacity.course3.reviews.controller;
 
 import com.udacity.course3.reviews.entity.Comment;
 import com.udacity.course3.reviews.persistance.PersistenceService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,12 +16,9 @@ import java.util.Optional;
 @RequestMapping("/comments")
 public class CommentsController {
 
-    private final PersistenceService persistenceService;
+    @Autowired
+    private PersistenceService persistenceService;
 
-    public CommentsController(
-            PersistenceService persistenceService) {
-        this.persistenceService = persistenceService;
-    }
     /**
      * Creates a comment for a review.
      *

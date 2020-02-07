@@ -2,6 +2,7 @@ package com.udacity.course3.reviews.controller;
 
 import com.udacity.course3.reviews.entity.Product;
 import com.udacity.course3.reviews.persistance.PersistenceService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +17,8 @@ import java.util.Optional;
 @RequestMapping("/products")
 public class ProductsController {
 
-    private final PersistenceService persistenceService;
-
-    public ProductsController(PersistenceService persistenceService) {
-        this.persistenceService = persistenceService;
-    }
+    @Autowired
+    private PersistenceService persistenceService;
 
     /**
      * Creates a product.
