@@ -40,7 +40,8 @@ public class PersistenceService {
 
     public Optional<Comment> createCommentForReview(Integer reviewId, Comment comment) {
         Optional<Review> optionalReview = reviewRepository.findById(reviewId);
-        if(!optionalReview.isPresent()) {
+        Optional<ReviewMongo> optionalReviewMongo = reviewMongoRepository.findByReviewId(reviewId);
+        if(!optionalReview.isPresent() || !optionalReviewMongo.isPresent()) {
             return Optional.empty();
         }
 
@@ -51,7 +52,8 @@ public class PersistenceService {
         commentMongo.setCustomer(comment.getCustomer());
         commentMongo.setDescription(comment.getDescription());
         commentMongo.setCreatedTime(comment.getCreatedTime());
-        commentMongoRepository.save(commentMongo);
+        optionalReviewMongo.get().getComments().add(commentMongo);
+        reviewMongoRepository.save(optionalReviewMongo.get());
         return Optional.of(savedComment);
     }
 
