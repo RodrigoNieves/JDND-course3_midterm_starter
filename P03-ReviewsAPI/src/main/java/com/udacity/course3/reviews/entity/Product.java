@@ -22,7 +22,7 @@ public class Product {
     private String title;
 
     @Column(name = "description")
-    @NotEmpty(message = "Please provide a product's descripton")
+    @NotEmpty(message = "Please provide a product's description")
     private String description;
 
     @GeneratedValue(strategy = GenerationType.AUTO)
