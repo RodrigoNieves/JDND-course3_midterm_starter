@@ -6,8 +6,6 @@ import com.udacity.course3.reviews.entity.Review;
 import com.udacity.course3.reviews.repository.jpa.CommentRepository;
 import com.udacity.course3.reviews.repository.jpa.ProductRepository;
 import com.udacity.course3.reviews.repository.jpa.ReviewRepository;
-import net.bytebuddy.asm.Advice;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
