@@ -25,7 +25,7 @@ public class CommentMongoRepositoryTest {
 
 
     @Test
-    public void checkMongoTemplate() {
+    public void checkInitialization() {
         assertNotNull(mongoTemplate);
         assertNotNull(commentMongoRepository);
     }
