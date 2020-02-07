@@ -4,10 +4,12 @@ import com.udacity.course3.reviews.entity.Comment;
 import com.udacity.course3.reviews.entity.Product;
 import com.udacity.course3.reviews.entity.Review;
 import com.udacity.course3.reviews.model.CommentMongo;
+import com.udacity.course3.reviews.model.ReviewMongo;
 import com.udacity.course3.reviews.repository.jpa.CommentRepository;
 import com.udacity.course3.reviews.repository.jpa.ProductRepository;
 import com.udacity.course3.reviews.repository.jpa.ReviewRepository;
 import com.udacity.course3.reviews.repository.mongo.CommentMongoRepository;
+import com.udacity.course3.reviews.repository.mongo.ReviewMongoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,16 +23,19 @@ public class PersistenceService {
     private final ReviewRepository reviewRepository;
     private final ProductRepository productRepository;
     private final CommentMongoRepository commentMongoRepository;
+    private final ReviewMongoRepository reviewMongoRepository;
 
 
     public PersistenceService(CommentRepository commentRepository,
                               ReviewRepository reviewRepository,
                               ProductRepository productRepository,
-                              CommentMongoRepository commentMongoRepository){
+                              CommentMongoRepository commentMongoRepository,
+                              ReviewMongoRepository reviewMongoRepository){
         this.commentRepository = commentRepository;
         this.reviewRepository = reviewRepository;
         this.productRepository = productRepository;
         this.commentMongoRepository = commentMongoRepository;
+        this.reviewMongoRepository = reviewMongoRepository;
     }
 
     public Optional<Comment> createCommentForReview(Integer reviewId, Comment comment) {
