@@ -52,10 +52,10 @@ public class PersistenceService {
 
         // Back up comment on MongoDB
         CommentMongo commentMongo = new CommentMongo();
-        commentMongo.setCommentId(comment.getCommentId());
-        commentMongo.setCustomer(comment.getCustomer());
-        commentMongo.setDescription(comment.getDescription());
-        commentMongo.setCreatedTime(comment.getCreatedTime());
+        commentMongo.setCommentId(savedComment.getCommentId());
+        commentMongo.setCustomer(savedComment.getCustomer());
+        commentMongo.setDescription(savedComment.getDescription());
+        commentMongo.setCreatedTime(savedComment.getCreatedTime());
         optionalReviewMongo.get().getComments().add(commentMongo);
         reviewMongoRepository.save(optionalReviewMongo.get());
         return Optional.of(savedComment);
