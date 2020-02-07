@@ -17,10 +17,10 @@ import java.util.Optional;
 @RequestMapping("/products")
 public class ProductsController {
 
-    private PersistenceService persistenceService;
+    private final PersistenceService persistenceService;
 
-    public ProductsController() {
-        persistenceService = new PersistenceService();
+    public ProductsController(PersistenceService persistenceService) {
+        this.persistenceService = persistenceService;
     }
     /**
      * Creates a product.

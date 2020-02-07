@@ -16,10 +16,10 @@ import java.util.Optional;
 @RequestMapping("/comments")
 public class CommentsController {
 
-    private PersistenceService persistenceService;
+    private final PersistenceService persistenceService;
 
-    public CommentsController() {
-        persistenceService = new PersistenceService();
+    public CommentsController(PersistenceService persistenceService) {
+        this.persistenceService = persistenceService;
     }
 
     /**

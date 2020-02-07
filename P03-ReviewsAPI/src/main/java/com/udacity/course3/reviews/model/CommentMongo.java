@@ -5,7 +5,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Document("comments")

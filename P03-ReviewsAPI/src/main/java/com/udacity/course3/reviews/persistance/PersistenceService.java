@@ -8,18 +8,28 @@ import com.udacity.course3.reviews.repository.jpa.ProductRepository;
 import com.udacity.course3.reviews.repository.jpa.ReviewRepository;
 import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class PersistenceService {
 
-    @Autowired
-    private CommentRepository commentRepository;
-    @Autowired
-    private ReviewRepository reviewRepository;
-    @Autowired
-    private ProductRepository productRepository;
+
+    private final CommentRepository commentRepository;
+
+    private final ReviewRepository reviewRepository;
+
+    private final ProductRepository productRepository;
+
+    public PersistenceService(CommentRepository commentRepository,
+                              ReviewRepository reviewRepository,
+                              ProductRepository productRepository){
+        this.commentRepository = commentRepository;
+        this.reviewRepository = reviewRepository;
+        this.productRepository = productRepository;
+    }
 
     public Optional<Comment> createCommentForReview(Integer reviewId, Comment comment) {
         Optional<Review> optionalReview = reviewRepository.findById(reviewId);

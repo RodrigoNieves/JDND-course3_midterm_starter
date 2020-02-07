@@ -15,10 +15,10 @@ import java.util.Optional;
 @RestController
 public class ReviewsController {
 
-    private PersistenceService persistenceService;
+    private final PersistenceService persistenceService;
 
-    public ReviewsController() {
-        persistenceService = new PersistenceService();
+    public ReviewsController(PersistenceService persistenceService) {
+        this.persistenceService = persistenceService;
     }
 
     /**
