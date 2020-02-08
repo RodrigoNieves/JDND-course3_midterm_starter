@@ -2,9 +2,9 @@ package com.udacity.course3.reviews.model;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.annotation.Id;
 
-import javax.persistence.Id;
-import javax.validation.constraints.NotEmpty;
+
 import java.util.Date;
 
 @Document("comments")
@@ -15,7 +15,6 @@ public class CommentMongo {
 
     private String customer;
 
-    @NotEmpty(message = "Please provide a comment's description")
     private String description;
 
     @CreatedDate
