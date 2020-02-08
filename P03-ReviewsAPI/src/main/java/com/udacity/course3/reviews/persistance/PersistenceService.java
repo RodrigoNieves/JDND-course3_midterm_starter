@@ -58,7 +58,7 @@ public class PersistenceService {
         commentMongo.setDescription(savedComment.getDescription());
         commentMongo.setCreatedTime(savedComment.getCreatedTime());
         reviewMongo.getComments().add(commentMongo);
-
+        commentMongoRepository.save(commentMongo);
         reviewMongoRepository.save(reviewMongo);
         return Optional.of(savedComment);
     }
