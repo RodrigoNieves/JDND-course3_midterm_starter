@@ -1,6 +1,7 @@
 package com.udacity.course3.reviews.model;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.annotation.Id;
 
@@ -25,6 +26,7 @@ public class ReviewMongo {
     @CreatedDate
     private Date createdTime;
 
+    @DBRef
     private List<CommentMongo> comments = new ArrayList<>();
 
     public Integer getReviewId() {
