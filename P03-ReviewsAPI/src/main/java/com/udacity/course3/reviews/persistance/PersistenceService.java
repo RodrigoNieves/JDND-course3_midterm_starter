@@ -78,7 +78,7 @@ public class PersistenceService {
             return Optional.empty();
         }
 
-        // Save review in MySQLt
+        // Save review in MySQL
         review.setProduct(optionalProduct.get());
         Review savedReview = reviewRepository.save(review);
 
